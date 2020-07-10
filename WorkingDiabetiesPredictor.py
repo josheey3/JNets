@@ -14,7 +14,7 @@ dataframe = pandas.read_csv(url, names=names)
 #  4	    1     1        0        	1
 #  5	    1     1        1        	1
 
-feature_set = np.array([[0.5,1,0],
+feature_set = np.array([[0,1,0],
                         [0,0,1],
                         [1,0,0],
                         [1,1,0],

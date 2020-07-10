@@ -19,6 +19,7 @@ for row in featureSet:
     rowCount += 1
 
 labels = labels.reshape(len(labels), 1)
+#labels = np.array([labels])
 
 np.random.seed(42)
 weights = np.random.rand(len(finalSet[0]), 1)  # (4,1)
@@ -55,7 +56,7 @@ while(True):
     print("--------")
     readLn = input(": ")
 
-    single_point = np.array([6,148,72,35,0,33.6,0.627,50])
+    single_point = np.array([1,115,70,30,96,34.6,0.529,32])
     result = sigmoid(np.dot(single_point, weights) + bias)
     resultPercent = result*100
     print("Chance: %.2f" % resultPercent + "%")
