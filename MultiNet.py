@@ -1,10 +1,14 @@
 import numpy as np
 import pandas
 
-dataCSVPath = "https://raw.githubusercontent.com/jbrownlee/Datasets/master/pima-indians-diabetes.data.csv"
-names = ['preg', 'plas', 'pres', 'skin', 'test', 'mass', 'pedi', 'age', 'class']
-dataframe = pandas.read_csv(dataCSVPath, names=names)
+#dataCSVPath = "https://raw.githubusercontent.com/jbrownlee/Datasets/master/pima-indians-diabetes.data.csv"
+#dataCSVPath = "https://raw.githubusercontent.com/xeronick/test/master/testData.csv"
+dataCSVPath = "https://raw.githubusercontent.com/jbrownlee/Datasets/master/wine.csv"
+#names = ['preg', 'plas', 'pres', 'skin', 'test', 'mass', 'pedi', 'age', 'class']
+dataframe = pandas.read_csv(dataCSVPath)#, names=names)
 featureSet = np.array(dataframe.values)
+
+
 
 finalSet = np.array([]) # Array of data/inputs
 labels = np.array([], dtype=int) # Array of answers
@@ -24,7 +28,7 @@ labels = labels.reshape(len(labels), 1)
 np.random.seed(42)
 weights = np.random.rand(len(finalSet[0]), 1)  # (4,1)
 bias = np.random.rand(1)
-lr = 0.05
+lr = 50.05
 
 def sigmoid(x):
     return 1/(1+np.exp(-x))
@@ -56,7 +60,8 @@ while(True):
     print("--------")
     readLn = input(": ")
 
-    single_point = np.array([1,115,70,30,96,34.6,0.529,32])
+    #single_point = np.array([1,115,70,30,96,34.6,0.529,32])
+    single_point = np.array([1,0,0])
     result = sigmoid(np.dot(single_point, weights) + bias)
     resultPercent = result*100
     print("Chance: %.2f" % resultPercent + "%")

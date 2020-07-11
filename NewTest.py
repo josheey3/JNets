@@ -14,16 +14,16 @@ dataframe = pandas.read_csv(url, names=names)
 #  4	    1     1        0        	1
 #  5	    1     1        1        	1
 
-feature_set = np.array([[2,5,0],
-                        [6,2,1],
-                        [1,7,0],
-                        [1,1,1],
-                        [2,1,1]]) #Sample data
+feature_set = np.array([[0,1,0],
+                        [0,0,1],
+                        [1,0,0],
+                        [1,1,0],
+                        [1,1,1]]) #Sample data
 labels = np.array([[1,
                     0,
-                    1,
                     0,
-                    0
+                    1,
+                    1
                     ]]) # Answers
 
 # Sample data could be the station alams (table with loads of bits in)
@@ -37,13 +37,10 @@ lr = 0.05
 def sigmoid(x):
     return 1/(1+np.exp(-x))
 
-a = sigmoid(2)
-b = sigmoid(5000)
-
 def sigmoid_der(x):
     return sigmoid(x)*(1-sigmoid(x))
 
-for epoch in range(10000):
+for epoch in range(100000):
     inputs = feature_set
     # feedforward step1
     XW = np.dot(feature_set, weights) + bias
@@ -63,9 +60,16 @@ for epoch in range(10000):
 
     for num in z_delta:
         bias -= lr * num
-        
-print("--------")
-single_point = np.array([0,0,1])
-result = sigmoid(np.dot(single_point, weights) + bias)
-resultPercent = result*100
-print("%.2f" % resultPercent + "%")
+
+
+while(True): 
+    print("--------")
+    inSmoker = float(input("Do you smoke? "))
+    inObese = float(input("Do are you obese? "))
+    inExercise = float(input("Do you exercise? "))
+
+    single_point = np.array([inSmoker,inObese,inExercise])
+    #single_point = np.array([0,0,1])
+    result = sigmoid(np.dot(single_point, weights) + bias)
+    resultPercent = result*100
+    print("Chance of diabities: %.2f" % resultPercent + "%")
