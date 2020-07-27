@@ -2,10 +2,13 @@ import numpy as np
 import pandas
 
 #dataCSVPath = "https://raw.githubusercontent.com/jbrownlee/Datasets/master/pima-indians-diabetes.data.csv"
-#dataCSVPath = "https://raw.githubusercontent.com/jbrownlee/Datasets/master/wine.csv"
-dataCSVPath = "https://raw.githubusercontent.com/xeronick/test/master/testData.csv"
-dataframe = pandas.read_csv(dataCSVPath)
-featureSet = np.array(dataframe.values)
+#dataCSVPath = "https://raw.githubusercontent.com/xeronick/test/master/testData.csv"
+dataCSVPath = "https://raw.githubusercontent.com/jbrownlee/Datasets/master/wine.csv"
+#names = ['preg', 'plas', 'pres', 'skin', 'test', 'mass', 'pedi', 'age', 'class']
+dataframe = pandas.read_csv(dataCSVPath)#, names=names)
+featureSet = np.array([[0,1,1],[0,2,2],[1,1,2],[1,2,3],[0,3,3],[2,2,4]])
+
+
 
 finalSet = np.array([]) # Array of data/inputs
 labels = np.array([], dtype=int) # Array of answers
@@ -20,9 +23,10 @@ for row in featureSet:
     rowCount += 1
 
 labels = labels.reshape(len(labels), 1)
+#labels = np.array([labels])
 
 np.random.seed(42)
-weights = np.random.rand(len(finalSet[0]), 1)
+weights = np.random.rand(len(finalSet[0]), 1)  # (4,1)
 bias = np.random.rand(1)
 lr = 50.05
 
@@ -31,7 +35,7 @@ def sigmoid(x):
 def sigmoid_der(x):
     return sigmoid(x)*(1-sigmoid(x))
 
-for epoch in range(2000):
+for epoch in range(500):
     inputs = finalSet
     # feedforward step1
     XW = np.dot(finalSet, weights) + bias
@@ -56,7 +60,8 @@ while(True):
     print("--------")
     readLn = input(": ")
 
-    single_point = np.array([1,0,0])
+    #single_point = np.array([1,115,70,30,96,34.6,0.529,32])
+    single_point = np.array([1,1,0])
     result = sigmoid(np.dot(single_point, weights) + bias)
     resultPercent = result*100
     print("Chance: %.2f" % resultPercent + "%")
